@@ -12,24 +12,26 @@ import UIKit
 class PageViewControllerInfo: UIPageViewController {
 
     var pages = [UIViewController]()
-    
-//    let skipButton = UIButton()
-//    let nextButton = UIButton()
+    var pageControlBottomAnchor: NSLayoutConstraint?
+
     let pageControl = UIPageControl()
     let initialPage = 0
-
-    // animations
-    var pageControlBottomAnchor: NSLayoutConstraint?
-    var skipButtonTopAnchor: NSLayoutConstraint?
-    var nextButtonTopAnchor: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setup()
         style()
         layout()
     }
+    
+    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
 
 extension PageViewControllerInfo {
@@ -75,15 +77,11 @@ extension PageViewControllerInfo {
             pageControl.heightAnchor.constraint(equalToConstant: 20),
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-        
-        // for animations
+        pageControlBottomAnchor = view.bottomAnchor.constraint(equalToSystemSpacingBelow: pageControl.bottomAnchor, multiplier: 2)
+            
         pageControlBottomAnchor?.isActive = true
-        skipButtonTopAnchor?.isActive = true
-        nextButtonTopAnchor?.isActive = true
     }
 }
-
-// MARK: - DataSource
 
 extension PageViewControllerInfo: UIPageViewControllerDataSource {
     
@@ -110,11 +108,9 @@ extension PageViewControllerInfo: UIPageViewControllerDataSource {
     }
 }
 
-// MARK: - Delegates
 
 extension PageViewControllerInfo: UIPageViewControllerDelegate {
     
-    // How we keep our pageControl in sync with viewControllers
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
         guard let viewControllers = pageViewController.viewControllers else { return }
@@ -126,7 +122,7 @@ extension PageViewControllerInfo: UIPageViewControllerDelegate {
     
     private func animateControlsIfNeeded() {
         let lastPage = pageControl.currentPage == pages.count - 1
-        
+
         if lastPage {
             hideControls()
         } else {
@@ -140,18 +136,12 @@ extension PageViewControllerInfo: UIPageViewControllerDelegate {
     
     private func hideControls() {
         pageControlBottomAnchor?.constant = -80
-        skipButtonTopAnchor?.constant = -80
-        nextButtonTopAnchor?.constant = -80
     }
 
     private func showControls() {
         pageControlBottomAnchor?.constant = 16
-        skipButtonTopAnchor?.constant = 16
-        nextButtonTopAnchor?.constant = 16
     }
 }
-
-// MARK: - Actions
 
 extension PageViewControllerInfo {
 
@@ -159,41 +149,5 @@ extension PageViewControllerInfo {
         setViewControllers([pages[sender.currentPage]], direction: .forward, animated: true, completion: nil)
         animateControlsIfNeeded()
     }
-
-    @objc func skipTapped(_ sender: UIButton) {
-        let lastPage = pages.count - 1
-        pageControl.currentPage = lastPage
-        
-        goToSpecificPage(index: lastPage, ofViewControllers: pages)
-        animateControlsIfNeeded()
-    }
-    
-    @objc func nextTapped(_ sender: UIButton) {
-        pageControl.currentPage += 1
-        goToNextPage()
-        animateControlsIfNeeded()
-    }
 }
 
-// MARK: - Extensions
-
-extension UIPageViewController {
-
-    func goToNextPage(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
-        guard let currentPage = viewControllers?[0] else { return }
-        guard let nextPage = dataSource?.pageViewController(self, viewControllerAfter: currentPage) else { return }
-        
-        setViewControllers([nextPage], direction: .forward, animated: animated, completion: completion)
-    }
-    
-    func goToPreviousPage(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
-        guard let currentPage = viewControllers?[0] else { return }
-        guard let prevPage = dataSource?.pageViewController(self, viewControllerBefore: currentPage) else { return }
-        
-        setViewControllers([prevPage], direction: .forward, animated: animated, completion: completion)
-    }
-    
-    func goToSpecificPage(index: Int, ofViewControllers pages: [UIViewController]) {
-        setViewControllers([pages[index]], direction: .forward, animated: true, completion: nil)
-    }
-}
