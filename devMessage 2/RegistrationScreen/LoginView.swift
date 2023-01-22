@@ -21,6 +21,7 @@ final class LoginView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        keyboardLayoutGuide.followsUndockedKeyboard = true // Mark 1
         backgroundColor = .lemons
     }
     
@@ -80,7 +81,7 @@ final class LoginView: UIView {
         
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.keyboardLayoutGuide.topAnchor, constant: -40),
+//            stackView.bottomAnchor.constraint(equalTo: self.keyboardLayoutGuide.topAnchor, constant: -40),
             
             emailTextField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
             emailTextField.heightAnchor.constraint(equalToConstant: 44),
@@ -96,6 +97,9 @@ final class LoginView: UIView {
             label.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -40),
             label.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
+        
+        let stackOnKeyboard = keyboardLayoutGuide.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 45) // Mark 2
+               keyboardLayoutGuide.setConstraints([stackOnKeyboard], activeWhenAwayFrom: .top)
     }
    
 }
