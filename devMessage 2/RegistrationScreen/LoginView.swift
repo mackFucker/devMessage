@@ -7,8 +7,18 @@
 
 import UIKit
 
+protocol LoginViewOutput: AnyObject {
+    
+}
+
+protocol LoginViewInput: AnyObject {
+    func setupOutput(output: LoginViewOutput)
+}
+
 final class LoginView: UIView {
     
+    private weak var output: LoginViewOutput?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .lemons
@@ -17,6 +27,15 @@ final class LoginView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private lazy var label: UILabel = {
+        let label = UILabel()
+        label.text =  "devMessage"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.boldSystemFont(ofSize: 40)
+        addSubview(label)
+        return label
+    }()
     
     private lazy var emailTextField: UITextField = {
         let emailTextField = UITextField()
@@ -41,7 +60,6 @@ final class LoginView: UIView {
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.setTitle("Login", for: .normal)
         loginButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        loginButton.contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
         loginButton.backgroundColor = .systemBlue
         loginButton.layer.cornerRadius = 8
         return loginButton
@@ -62,7 +80,7 @@ final class LoginView: UIView {
         
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stackView.bottomAnchor.constraint(equalTo: self.keyboardLayoutGuide.topAnchor, constant: -40),
             
             emailTextField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
             emailTextField.heightAnchor.constraint(equalToConstant: 44),
@@ -72,6 +90,20 @@ final class LoginView: UIView {
             
             loginButton.widthAnchor.constraint(equalTo: emailTextField.widthAnchor),
             loginButton.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
+            
+            label.centerXAnchor.constraint(equalTo: centerXAnchor),
+            label.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50),
+            label.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -40),
+            label.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
     }
+   
 }
+
+extension LoginView: LoginViewInput {
+    
+    func setupOutput(output: LoginViewOutput) {
+        self.output = output
+    }
+}
+

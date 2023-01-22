@@ -18,6 +18,7 @@
 		8F335E9929796217006DB176 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F335E9829796217006DB176 /* LoginViewController.swift */; };
 		8F335E9B29796232006DB176 /* UIColor+ .swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F335E9A29796232006DB176 /* UIColor+ .swift */; };
 		8F335EA2297981F9006DB176 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F335EA1297981F9006DB176 /* GoogleService-Info.plist */; };
+		8F3FD21A297CB6970071069A /* KeyboardLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3FD219297CB6970071069A /* KeyboardLayoutGuide.swift */; };
 		B4D789A11C34AF4ADC7D67FA /* Pods_devMessage_2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9EAD00A0644307DC8BC243 /* Pods_devMessage_2.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		8F335E9829796217006DB176 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8F335E9A29796232006DB176 /* UIColor+ .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ .swift"; sourceTree = "<group>"; };
 		8F335EA1297981F9006DB176 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8F3FD219297CB6970071069A /* KeyboardLayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutGuide.swift; sourceTree = "<group>"; };
 		9F9EAD00A0644307DC8BC243 /* Pods_devMessage_2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_devMessage_2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD3E9C3653477BFBC9253E23 /* Pods-devMessage 2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-devMessage 2.debug.xcconfig"; path = "Target Support Files/Pods-devMessage 2/Pods-devMessage 2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +136,7 @@
 				8F335E9A29796232006DB176 /* UIColor+ .swift */,
 				8F335E7E2979604B006DB176 /* SceneDelegate.swift */,
 				8F335E7C2979604B006DB176 /* AppDelegate.swift */,
+				8F3FD219297CB6970071069A /* KeyboardLayoutGuide.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				8F335E97297961FE006DB176 /* LoginView.swift in Sources */,
 				8F335E95297961D9006DB176 /* OnboardingViewController.swift in Sources */,
 				8F335E7D2979604B006DB176 /* AppDelegate.swift in Sources */,
+				8F3FD21A297CB6970071069A /* KeyboardLayoutGuide.swift in Sources */,
 				8F335E9929796217006DB176 /* LoginViewController.swift in Sources */,
 				8F335E7F2979604B006DB176 /* SceneDelegate.swift in Sources */,
 				8F335E93297961B9006DB176 /* OnboardingView.swift in Sources */,

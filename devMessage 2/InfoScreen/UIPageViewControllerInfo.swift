@@ -25,7 +25,7 @@ class PageViewControllerInfo: UIPageViewController {
     }
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
-        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        super.init(transitionStyle: .pageCurl, navigationOrientation: .horizontal)
     }
 
     required init?(coder: NSCoder) {
@@ -51,7 +51,7 @@ extension PageViewControllerInfo {
         let page3 = OnboardingViewController(image: "level-up",
                                              titleText: "Have fun",
                                              subtitleText: "Level Up and have fun building mobile apps.")
-        let page4 = LoginViewController(loginView: LoginView())
+        let page4 = LoginViewController()
         
         pages.append(page1)
         pages.append(page2)
@@ -90,9 +90,9 @@ extension PageViewControllerInfo: UIPageViewControllerDataSource {
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
         
         if currentIndex == 0 {
-            return pages.last               // wrap last
+            return pages.last
         } else {
-            return pages[currentIndex - 1]  // go previous
+            return pages[currentIndex - 1]
         }
     }
         
@@ -101,9 +101,9 @@ extension PageViewControllerInfo: UIPageViewControllerDataSource {
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
 
         if currentIndex < pages.count - 1 {
-            return pages[currentIndex + 1]  // go next
+            return pages[currentIndex + 1]
         } else {
-            return pages.first              // wrap first
+            return pages.first
         }
     }
 }
