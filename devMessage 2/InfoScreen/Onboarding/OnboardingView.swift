@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OnboardingView: UIView {
+final class OnboardingView: UIView {
     
     init(image: String, titleText: String, subtitleText: String){
       

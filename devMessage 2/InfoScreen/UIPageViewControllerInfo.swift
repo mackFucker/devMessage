@@ -9,7 +9,7 @@ import UIKit
 
 import UIKit
 
-class PageViewControllerInfo: UIPageViewController {
+final class PageViewControllerInfo: UIPageViewController {
 
     var pages = [UIViewController]()
     var pageControlBottomAnchor: NSLayoutConstraint?
