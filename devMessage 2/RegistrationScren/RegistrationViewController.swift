@@ -19,6 +19,7 @@ class RegistrationViewController: UIViewController {
     override func loadView() {
         super.loadView()
         view = registrationView
+        registrationView.setupOutput(output: self)
     }
 
 }
@@ -36,5 +37,11 @@ extension RegistrationViewController {
     @objc
     private func hideKeyboard() {
         self.view.endEditing(true)
+    }
+}
+
+extension RegistrationViewController: RegistrationViewOutput {
+    func signUp() {
+        print("ALLAH ACBAR")
     }
 }

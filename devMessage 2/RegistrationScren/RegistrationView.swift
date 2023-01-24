@@ -7,10 +7,17 @@
 
 import UIKit
 
+protocol RegistrationViewOutput: AnyObject {
+    func signUp()
+}
+
+protocol RegistrationViewInput: AnyObject {
+    func setupOutput(output: RegistrationViewOutput)
+}
 
 final class RegistrationView: UIView {
     
-    private weak var output: LoginViewOutput?
+    private weak var output: RegistrationViewOutput?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -137,8 +144,6 @@ final class RegistrationView: UIView {
             title.topAnchor.constraint(equalTo: topAnchor, constant: 80),
             title.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -40),
             title.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 40),
-            
-
         ])
         
         let stackOnKeyboard = keyboardLayoutGuide.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30)
@@ -147,9 +152,8 @@ final class RegistrationView: UIView {
    
 }
 
-extension RegistrationView: LoginViewInput {
-    
-    func setupOutput(output: LoginViewOutput) {
+extension RegistrationView: RegistrationViewInput {
+    func setupOutput(output: RegistrationViewOutput) {
         self.output = output
     }
 }
