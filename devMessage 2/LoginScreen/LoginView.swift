@@ -18,11 +18,12 @@ protocol LoginViewInput: AnyObject {
 final class LoginView: UIView {
     
     private weak var output: LoginViewOutput?
-
+    private let checkField = CheckField.shared
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         keyboardLayoutGuide.followsUndockedKeyboard = true // Mark 1
-        backgroundColor = .lemons
+        backgroundColor = .systemBackground
     }
     
     required init?(coder: NSCoder) {
@@ -62,6 +63,7 @@ final class LoginView: UIView {
         passwordTextField.placeholder = "Password"
         passwordTextField.layer.cornerRadius = 8
         passwordTextField.textAlignment = .center
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.delegate = self
         return passwordTextField
     }()
@@ -101,13 +103,19 @@ final class LoginView: UIView {
     @objc
     private func signInAction(){
         print("нихуя")
+        if passwordTextField.text == "user password"{
+            print("пароли совпадают")
+        }
+        else{
+            print("пароли не совпадают")
+        }
     }
     
     @objc
     private func signUpAction(){
         output?.signUp()
     }
-    
+   
     override func updateConstraints() {
         super.updateConstraints()
         
@@ -123,7 +131,6 @@ final class LoginView: UIView {
             signInButton.widthAnchor.constraint(equalTo: emailTextField.widthAnchor),
             signInButton.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
             
-            title.centerXAnchor.constraint(equalTo: centerXAnchor),
             title.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50),
             title.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -40),
             title.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 40),
@@ -134,9 +141,11 @@ final class LoginView: UIView {
             signUpButton.centerXAnchor.constraint(equalTo: centerXAnchor),
 
         ])
-        
+       
         let stackOnKeyboard = keyboardLayoutGuide.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 55)
                keyboardLayoutGuide.setConstraints([stackOnKeyboard], activeWhenAwayFrom: .top)
+        emailTextField.setupUnderLineAndImage(imageName: "envelope")
+        passwordTextField.setupUnderLineAndImage(imageName: "lock")
     }
    
 }
@@ -150,8 +159,6 @@ extension LoginView: LoginViewInput {
 
 extension LoginView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        textField == emailTextField ? passwordTextField.becomeFirstResponder()
-//                                    : signinAction()
         if   textField == emailTextField {
             passwordTextField.becomeFirstResponder()
         }
@@ -159,6 +166,15 @@ extension LoginView: UITextFieldDelegate {
             signInAction()
         }
        return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        switch textField {
+            case emailTextField:
+                checkField.validField(emailTextField, emailTextField)
+            default:
+                checkField.validField(passwordTextField, passwordTextField)
+        }
     }
     
 }

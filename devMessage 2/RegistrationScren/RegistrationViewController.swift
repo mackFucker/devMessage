@@ -42,6 +42,7 @@ extension RegistrationViewController {
 
 extension RegistrationViewController: RegistrationViewOutput {
     func signUp() {
+        
         print("ALLAH ACBAR")
     }
 }

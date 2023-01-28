@@ -17,12 +17,14 @@ protocol RegistrationViewInput: AnyObject {
 
 final class RegistrationView: UIView {
     
+    private let checkField = CheckField.shared
+
     private weak var output: RegistrationViewOutput?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         keyboardLayoutGuide.followsUndockedKeyboard = true
-        backgroundColor = .lemons
+        backgroundColor = .systemBackground
     }
     
     required init?(coder: NSCoder) {
@@ -75,6 +77,7 @@ final class RegistrationView: UIView {
         passwordTextField.placeholder = "Password"
         passwordTextField.layer.cornerRadius = 8
         passwordTextField.textAlignment = .center
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.delegate = self
         return passwordTextField
     }()
@@ -88,6 +91,7 @@ final class RegistrationView: UIView {
         confirmPasswordTextField.placeholder = "Confirm password"
         confirmPasswordTextField.layer.cornerRadius = 8
         confirmPasswordTextField.textAlignment = .center
+        confirmPasswordTextField.isSecureTextEntry = true
         confirmPasswordTextField.delegate = self
         return confirmPasswordTextField
     }()
@@ -117,6 +121,18 @@ final class RegistrationView: UIView {
     @objc
     private func signUpAction(){
         output?.signUp()
+        
+        if  checkField.validField(nameTextField, nameTextField),
+            checkField.validField(emailTextField, emailTextField),
+            checkField.validField(passwordTextField, passwordTextField)
+           {
+            if passwordTextField.text == confirmPasswordTextField.text{
+                print("збс регистрация")
+            }
+            else{
+                print("not збс не регистрация")
+            }
+        }
     }
     
     override func updateConstraints() {
@@ -148,6 +164,11 @@ final class RegistrationView: UIView {
         
         let stackOnKeyboard = keyboardLayoutGuide.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30)
                keyboardLayoutGuide.setConstraints([stackOnKeyboard], activeWhenAwayFrom: .top)
+        
+        nameTextField.setupUnderLineAndImage(imageName: "person")
+        emailTextField.setupUnderLineAndImage(imageName: "envelope")
+        passwordTextField.setupUnderLineAndImage(imageName: "lock")
+        confirmPasswordTextField.setupUnderLineAndImage(imageName: "lock")
     }
    
 }
@@ -159,6 +180,26 @@ extension RegistrationView: RegistrationViewInput {
 }
 
 extension RegistrationView: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        switch textField {
+            case nameTextField:
+                checkField.validField(nameTextField, nameTextField)
+            case emailTextField:
+                checkField.validField(emailTextField, emailTextField)
+            case passwordTextField:
+                checkField.validField(passwordTextField, passwordTextField)
+            default:
+            checkField.validField(confirmPasswordTextField, confirmPasswordTextField)
+            if passwordTextField.text == confirmPasswordTextField.text{
+                print("пароли совпадают")
+            }
+            else{
+                print("пароли не совпадают")
+            }
+        }
+        
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
             case nameTextField:
@@ -169,10 +210,9 @@ extension RegistrationView: UITextFieldDelegate {
                 confirmPasswordTextField.becomeFirstResponder()
             default:
                 signUpAction()
-            }
+        }
         return true
     }
-    
 }
 
 

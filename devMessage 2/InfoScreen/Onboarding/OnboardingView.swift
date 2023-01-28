@@ -17,7 +17,7 @@ final class OnboardingView: UIView {
         titleLabel.text = titleText
         subtitleLabel.text = subtitleText
         
-        self.backgroundColor = .lemons
+        self.backgroundColor = .systemBackground
     }
 
     override init(frame: CGRect) {

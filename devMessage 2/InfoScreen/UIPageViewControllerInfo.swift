@@ -7,8 +7,6 @@
 
 import UIKit
 
-import UIKit
-
 final class PageViewControllerInfo: UIPageViewController {
 
     var pages = [UIViewController]()
