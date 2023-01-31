@@ -9,6 +9,7 @@ import UIKit
 
 protocol LoginViewOutput: AnyObject {
     func signUp()
+    func signIn(_ data: RegistrationField)
 }
 
 protocol LoginViewInput: AnyObject {
@@ -50,6 +51,7 @@ final class LoginView: UIView {
         emailTextField.placeholder = "Email"
         emailTextField.layer.cornerRadius = 8
         emailTextField.textAlignment = .center
+        emailTextField.addImage(imageName: "envelope")
         emailTextField.delegate = self
         return emailTextField
     }()
@@ -64,6 +66,7 @@ final class LoginView: UIView {
         passwordTextField.layer.cornerRadius = 8
         passwordTextField.textAlignment = .center
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.addImage(imageName: "lock")
         passwordTextField.delegate = self
         return passwordTextField
     }()
@@ -101,19 +104,30 @@ final class LoginView: UIView {
     }()
     
     @objc
-    private func signInAction(){
-        print("нихуя")
-        if passwordTextField.text == "user password"{
-            print("пароли совпадают")
-        }
-        else{
-            print("пароли не совпадают")
+    private func signInAction() {
+        
+        if  checkField.validField(emailTextField, emailTextField),
+            checkField.validField(passwordTextField, passwordTextField)
+           {
+            if passwordTextField.text == passwordTextField.text {//FIXME: user pasword
+                let authData = RegistrationField(email: emailTextField.text!, password: passwordTextField.text!)
+                output?.signIn(authData)
+                print("збс регистрация")
+            }
+            else{
+                print("not збс не регистрация")
+            }
         }
     }
     
     @objc
-    private func signUpAction(){
+    private func signUpAction() {
         output?.signUp()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
     }
    
     override func updateConstraints() {
@@ -144,8 +158,8 @@ final class LoginView: UIView {
        
         let stackOnKeyboard = keyboardLayoutGuide.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 55)
                keyboardLayoutGuide.setConstraints([stackOnKeyboard], activeWhenAwayFrom: .top)
-        emailTextField.setupUnderLineAndImage(imageName: "envelope")
-        passwordTextField.setupUnderLineAndImage(imageName: "lock")
+        emailTextField.setupUnderLineAndImage()
+        passwordTextField.setupUnderLineAndImage()
     }
    
 }

@@ -4,7 +4,8 @@
 target 'devMessage 2' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-pod 'Firebase/Auth' 
+pod 'Firebase/Auth'
+pod 'FirebaseFirestore'
   # Pods for devMessage 2
 
 end

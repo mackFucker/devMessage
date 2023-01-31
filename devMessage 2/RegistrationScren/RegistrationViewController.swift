@@ -8,7 +8,11 @@
 import UIKit
 
 class RegistrationViewController: UIViewController {
-
+    
+//FIXME: говно ебанное, избавится от синглотона
+    
+    var shared = Service.shared
+    
     private let registrationView = RegistrationView()
     
     override func viewDidLoad() {
@@ -41,8 +45,19 @@ extension RegistrationViewController {
 }
 
 extension RegistrationViewController: RegistrationViewOutput {
-    func signUp() {
-        
+    func signUp(data: RegistrationField) {
+        shared.createNewUser(data){ [weak self] code in
+        switch code.code {
+            case 0:
+                print("registration error")
+            case 1:
+                self!.shared.confimEmail()
+                print("registration zbs") //next Screen
+
+            default:
+                print("unkown error")
+            }
+        }
         print("ALLAH ACBAR")
     }
 }

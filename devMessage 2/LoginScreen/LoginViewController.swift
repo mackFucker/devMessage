@@ -10,6 +10,8 @@ import UIKit
 final class LoginViewController: UIViewController  {
   
     private let loginView = LoginView()
+    //FIXME: удалить тварь
+    let service = Service.shared
     
     override func loadView() {
         super.loadView()
@@ -43,5 +45,21 @@ extension LoginViewController: LoginViewOutput {
     func signUp() {
         let presentVC = RegistrationViewController()
         navigationController?.pushViewController(presentVC, animated: true)
+//        present(presentVC, animated: true)
     }
+    
+    func signIn(_ data: RegistrationField) {
+        service.authInApp(data) { responce in
+            switch responce {
+            case .success:
+                print("auth success NEXT")
+            case .error:
+                print("error")
+            case .noVerify:
+                print("no ferify, check your email")
+            }
+        }
+    }
+    
+    
 }

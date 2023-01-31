@@ -24,6 +24,8 @@
 		8F3FD223297FB2510071069A /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3FD222297FB2510071069A /* ChatView.swift */; };
 		8F63BF6029832ABD00BB1E0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F63BF5F29832ABD00BB1E0C /* GoogleService-Info.plist */; };
 		8F63BF6229849E8100BB1E0C /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F63BF6129849E8100BB1E0C /* UITextField+.swift */; };
+		8F63BF662986D42800BB1E0C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F63BF652986D42800BB1E0C /* Service.swift */; };
+		8F63BF682986D5CB00BB1E0C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F63BF672986D5CB00BB1E0C /* Model.swift */; };
 		B4D789A11C34AF4ADC7D67FA /* Pods_devMessage_2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9EAD00A0644307DC8BC243 /* Pods_devMessage_2.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,8 @@
 		8F3FD222297FB2510071069A /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		8F63BF5F29832ABD00BB1E0C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8F63BF6129849E8100BB1E0C /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		8F63BF652986D42800BB1E0C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		8F63BF672986D5CB00BB1E0C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		9F9EAD00A0644307DC8BC243 /* Pods_devMessage_2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_devMessage_2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD3E9C3653477BFBC9253E23 /* Pods-devMessage 2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-devMessage 2.debug.xcconfig"; path = "Target Support Files/Pods-devMessage 2/Pods-devMessage 2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,15 +106,18 @@
 		8F335E7B2979604B006DB176 /* devMessage 2 */ = {
 			isa = PBXGroup;
 			children = (
-				8F23D5CE29831B110035BAF1 /* CheckField.swift */,
 				8F335E9C29796259006DB176 /* InfoScreen */,
 				8F335E9F2979627A006DB176 /* LoginScreen */,
 				8F3FD21B297DDED80071069A /* RegistrationScren */,
 				8F3FD224297FB25D0071069A /* ChatScreen */,
 				8F335EA02979628D006DB176 /* App */,
 				8F335E8A2979604C006DB176 /* Info.plist */,
+				8F63BF5F29832ABD00BB1E0C /* GoogleService-Info.plist */,
 				8F335E9A29796232006DB176 /* UIColor+ .swift */,
 				8F63BF6129849E8100BB1E0C /* UITextField+.swift */,
+				8F63BF652986D42800BB1E0C /* Service.swift */,
+				8F63BF672986D5CB00BB1E0C /* Model.swift */,
+				8F23D5CE29831B110035BAF1 /* CheckField.swift */,
 			);
 			path = "devMessage 2";
 			sourceTree = "<group>";
@@ -145,7 +152,6 @@
 		8F335EA02979628D006DB176 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				8F63BF5F29832ABD00BB1E0C /* GoogleService-Info.plist */,
 				8F335E872979604C006DB176 /* LaunchScreen.storyboard */,
 				8F335E852979604C006DB176 /* Assets.xcassets */,
 				8F335E7E2979604B006DB176 /* SceneDelegate.swift */,
@@ -289,10 +295,12 @@
 			files = (
 				8F335E97297961FE006DB176 /* LoginView.swift in Sources */,
 				8F335E95297961D9006DB176 /* OnboardingViewController.swift in Sources */,
+				8F63BF662986D42800BB1E0C /* Service.swift in Sources */,
 				8F3FD221297FB2290071069A /* ChatViewController.swift in Sources */,
 				8F335E7D2979604B006DB176 /* AppDelegate.swift in Sources */,
 				8F3FD223297FB2510071069A /* ChatView.swift in Sources */,
 				8F3FD21D297DDF160071069A /* RegistrationViewController.swift in Sources */,
+				8F63BF682986D5CB00BB1E0C /* Model.swift in Sources */,
 				8F335E9929796217006DB176 /* LoginViewController.swift in Sources */,
 				8F335E7F2979604B006DB176 /* SceneDelegate.swift in Sources */,
 				8F335E93297961B9006DB176 /* OnboardingView.swift in Sources */,

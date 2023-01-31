@@ -9,14 +9,16 @@ import UIKit
 
 extension UITextField {
     
-    func setupUnderLineAndImage(imageName: String) {
+    func setupUnderLineAndImage() {
         let border = CALayer()
         border.borderColor = UIColor.darkGreen.cgColor
         border.frame = CGRect(x: 20, y: self.frame.size.height - 1, width:  self.frame.size.width - 40 , height: 5)
         border.borderWidth = 5
         border.cornerRadius = 3
         self.layer.addSublayer(border)
-        
+    }
+    
+    func addImage(imageName: String) {
         let imageView = UIImageView()
         imageView.frame = CGRect(x: 8, y: 8, width: 24, height: 24)
         imageView.tintColor = .darkGreen

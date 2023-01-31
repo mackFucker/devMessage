@@ -8,7 +8,7 @@
 import UIKit
 
 protocol RegistrationViewOutput: AnyObject {
-    func signUp()
+    func signUp(data: RegistrationField)
 }
 
 protocol RegistrationViewInput: AnyObject {
@@ -50,6 +50,7 @@ final class RegistrationView: UIView {
         nameTextField.placeholder = "User name"
         nameTextField.layer.cornerRadius = 8
         nameTextField.textAlignment = .center
+        nameTextField.addImage(imageName: "person")
         nameTextField.delegate = self
         return nameTextField
     }()
@@ -64,6 +65,7 @@ final class RegistrationView: UIView {
         emailTextField.placeholder = "Email"
         emailTextField.layer.cornerRadius = 8
         emailTextField.textAlignment = .center
+        emailTextField.addImage(imageName: "envelope")
         emailTextField.delegate = self
         return emailTextField
     }()
@@ -78,6 +80,7 @@ final class RegistrationView: UIView {
         passwordTextField.layer.cornerRadius = 8
         passwordTextField.textAlignment = .center
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.addImage(imageName: "lock")
         passwordTextField.delegate = self
         return passwordTextField
     }()
@@ -92,6 +95,7 @@ final class RegistrationView: UIView {
         confirmPasswordTextField.layer.cornerRadius = 8
         confirmPasswordTextField.textAlignment = .center
         confirmPasswordTextField.isSecureTextEntry = true
+        confirmPasswordTextField.addImage(imageName: "lock")
         confirmPasswordTextField.delegate = self
         return confirmPasswordTextField
     }()
@@ -120,13 +124,13 @@ final class RegistrationView: UIView {
     
     @objc
     private func signUpAction(){
-        output?.signUp()
         
         if  checkField.validField(nameTextField, nameTextField),
             checkField.validField(emailTextField, emailTextField),
             checkField.validField(passwordTextField, passwordTextField)
            {
             if passwordTextField.text == confirmPasswordTextField.text{
+                output?.signUp(data: RegistrationField(email: emailTextField.text!, password: passwordTextField.text!))
                 print("збс регистрация")
             }
             else{
@@ -165,10 +169,10 @@ final class RegistrationView: UIView {
         let stackOnKeyboard = keyboardLayoutGuide.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30)
                keyboardLayoutGuide.setConstraints([stackOnKeyboard], activeWhenAwayFrom: .top)
         
-        nameTextField.setupUnderLineAndImage(imageName: "person")
-        emailTextField.setupUnderLineAndImage(imageName: "envelope")
-        passwordTextField.setupUnderLineAndImage(imageName: "lock")
-        confirmPasswordTextField.setupUnderLineAndImage(imageName: "lock")
+        nameTextField.setupUnderLineAndImage()
+        emailTextField.setupUnderLineAndImage()
+        passwordTextField.setupUnderLineAndImage()
+        confirmPasswordTextField.setupUnderLineAndImage()
     }
    
 }
